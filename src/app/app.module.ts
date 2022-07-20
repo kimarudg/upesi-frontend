@@ -1,3 +1,4 @@
+import { HttpLink } from 'apollo-angular/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -22,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+
 import {
   RegisterBoxedComponent,
   LoginBoxedComponent,
@@ -45,6 +48,7 @@ import { LogoComponent } from './layout/components/sidebar/elements/logo/logo.co
 // FOOTER
 
 import { FooterComponent } from './layout/components/footer/footer.component';
+import { graphqlFactory } from './constants';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -84,8 +88,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+
+    // GraphQL
+    ApolloModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: graphqlFactory,
+      deps: [HttpLink],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

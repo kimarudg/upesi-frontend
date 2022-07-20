@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login-boxed',
@@ -11,19 +12,21 @@ export class LoginBoxedComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
-  constructor(private formBuilder: FormBuilder) {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-  }
+  faSpinner = faSpinner;
+
+  constructor(private formBuilder: FormBuilder) {}
 
   // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    });
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -31,6 +34,7 @@ export class LoginBoxedComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+
     this.loading = true;
   }
 }
