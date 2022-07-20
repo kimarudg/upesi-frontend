@@ -49,6 +49,7 @@ import { LogoComponent } from './layout/components/sidebar/elements/logo/logo.co
 
 import { FooterComponent } from './layout/components/footer/footer.component';
 import { graphqlFactory } from './constants';
+import { AlertPageComponent } from './components/alert-page/alert-page.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -71,6 +72,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SidebarComponent,
     LogoComponent,
     FooterComponent,
+    AlertPageComponent,
   ],
   imports: [
     BrowserModule,

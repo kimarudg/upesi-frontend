@@ -1,1 +1,5 @@
-export interface Query {}
+import { User } from '../models';
+
+export interface Query {
+  login?: User;
+}
