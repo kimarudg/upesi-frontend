@@ -1,3 +1,6 @@
+import { AuthGuard } from './guards/auth.guard';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { BaseLayoutComponent } from './layout/base-layout/base-layout.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
@@ -10,22 +13,36 @@ import { PagesLayoutComponent } from './layout/pages-layout/pages-layout.compone
 const routes: Routes = [
   {
     path: '',
+    component: BaseLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        // Dashboads
+
+        path: '',
+        component: DashboardComponent,
+        data: { extraParameter: 'dashboardsMenu' },
+      },
+    ],
+  },
+  {
+    path: '',
     component: PagesLayoutComponent,
     children: [
       // User Pages
 
       {
-        path: 'pages/login-boxed',
+        path: 'auth/login',
         component: LoginBoxedComponent,
         data: { extraParameter: '' },
       },
       {
-        path: 'pages/register-boxed',
+        path: 'auth/register',
         component: RegisterBoxedComponent,
         data: { extraParameter: '' },
       },
       {
-        path: 'pages/forgot-password-boxed',
+        path: 'auth/forgot-password',
         component: ForgotPasswordBoxedComponent,
         data: { extraParameter: '' },
       },

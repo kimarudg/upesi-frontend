@@ -6,6 +6,7 @@ import { map, take, mergeMap } from 'rxjs/operators';
 import { StoreTypes } from '../constants/store-types';
 import { GET_LOGIN } from '../constants/graphql/queries/auth.gql';
 import { User } from '../constants';
+import { Store } from '../store';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +14,17 @@ import { User } from '../constants';
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  constructor(private graphqlService: GraphqlService) {
+  constructor(private graphqlService: GraphqlService, public store: Store) {
     const saved = JSON.parse(sessionStorage.getItem('currentUser'));
-    if (saved) {
-      this.currentUserSubject = new BehaviorSubject<User>(saved);
-      this.currentUser = this.currentUserSubject.asObservable();
-    }
+    const storeData = this.store.getState[StoreTypes.USER];
+    this.currentUserSubject = new BehaviorSubject<User>(
+      (Object.keys(storeData).length > 0 && storeData) || saved
+    );
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
   }
 
   login(email: string, password: string): Observable<User> {
