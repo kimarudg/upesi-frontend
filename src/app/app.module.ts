@@ -19,7 +19,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
@@ -53,6 +53,7 @@ import { AlertPageComponent } from './components/alert-page/alert-page.component
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ConfigActions } from './theme-options/store/config.actions';
 import { AccountListComponent } from './components/account-list/account-list.component';
+import { ApiInterceptor } from './interceptors/api.interceptor';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -104,6 +105,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: APOLLO_OPTIONS,
       useFactory: graphqlFactory,
       deps: [HttpLink],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true,
     },
     ConfigActions,
   ],
