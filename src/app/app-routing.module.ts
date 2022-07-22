@@ -1,3 +1,4 @@
+import { AccountListComponent } from './components/account-list/account-list.component';
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BaseLayoutComponent } from './layout/base-layout/base-layout.component';
@@ -22,6 +23,11 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
         data: { extraParameter: 'dashboardsMenu' },
+      },
+      {
+        path: 'accounts/list',
+        component: AccountListComponent,
+        data: { extraParameter: 'elementsMenu' },
       },
     ],
   },

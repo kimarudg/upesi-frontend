@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  graphqlUrl: 'https://upesi-api.herokuapp.com/graphql',
+  // graphqlUrl: 'https://upesi-api.herokuapp.com/graphql',
+  graphqlUrl: 'http://localhost:5900/graphql',
 };
 
 /*

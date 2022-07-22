@@ -52,6 +52,7 @@ import { graphqlFactory } from './constants';
 import { AlertPageComponent } from './components/alert-page/alert-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ConfigActions } from './theme-options/store/config.actions';
+import { AccountListComponent } from './components/account-list/account-list.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -76,6 +77,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FooterComponent,
     AlertPageComponent,
     DashboardComponent,
+    AccountListComponent,
   ],
   imports: [
     BrowserModule,
