@@ -8,7 +8,6 @@ export const LOGIN_USER = gql`
       email
       needPasswordChange
       lastLogin
-
       lastSeen
       avatarHash
     }

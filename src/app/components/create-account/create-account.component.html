@@ -1,0 +1,117 @@
+<form [formGroup]="accountApplicationForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h5 class="card-title">Apply Account</h5>
+          <br />
+          <app-alert></app-alert>
+          <div>
+            <div class="input-group">
+              <div class="input-group-text">
+                <span class=""
+                  >&nbsp;Account Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+                >
+              </div>
+              <input
+                placeholder="Account name"
+                type="text"
+                class="form-control"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid': submitted && f['name'].errors
+                }"
+              />
+            </div>
+            <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+              <div *ngIf="f['name'].errors['required']">Name is required</div>
+              <div *ngIf="f['name'].errors['minlength']">
+                Account Name must be at least 2 characters
+              </div>
+            </div>
+            <br />
+
+            <div class="input-group">
+              <div class="input-group-text">
+                <span class="">Account Reference</span>
+              </div>
+              <input
+                placeholder="Account Reference"
+                type="text"
+                class="form-control"
+                formControlName="reference"
+                [ngClass]="{
+                  'is-invalid': submitted && f['reference'].errors
+                }"
+              />
+            </div>
+            <div
+              *ngIf="submitted && f['reference'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['reference'].errors['required']">
+                Reference is required
+              </div>
+              <div *ngIf="f['reference'].errors['minlength']">
+                Reference must be at least 2 characters
+              </div>
+            </div>
+            <br />
+
+            <div class="input-group">
+              <div class="input-group-text">
+                <span class="">Account Currency&nbsp;&nbsp;</span>
+              </div>
+              <!-- <input
+                placeholder="Account Currency"
+                type="text"
+                class="form-control"
+                formControlName="currency"
+                [ngClass]="{
+                  'is-invalid': submitted && f['currency'].errors
+                }"
+              /> -->
+              <select
+                name="select"
+                formControlName="currency"
+                id="exampleSelect"
+                class="form-select"
+                [ngClass]="{
+                  'is-invalid': submitted && f['currency'].errors
+                }"
+              >
+                <option>1</option>
+                <option
+                  *ngFor="let currency of currencies"
+                  [ngValue]="currency"
+                >
+                  {{ currency.name }}
+                </option>
+              </select>
+            </div>
+            <br />
+            <div
+              *ngIf="submitted && f['currency'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['currency'].errors['required']">
+                Currency is required
+              </div>
+              <div *ngIf="f['currency'].errors['minlength']">
+                Currency must be at least 6 characters
+              </div>
+            </div>
+            <button class="mt-1 btn btn-primary" type="submit">
+              <fa-icon
+                *ngIf="loading"
+                [icon]="faSpinner"
+                [spin]="true"
+              ></fa-icon>
+              {{ loading ? "Submitting ... " : "Submit" }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -3,5 +3,7 @@ export class BankAccount {
   name: string;
   reference: string;
   currentBalance: number;
-  lastUpdated: string;
+  lastUpdated?: Date;
+  approved?: boolean;
+  currency?: any;
 }

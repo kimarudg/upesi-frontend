@@ -6,6 +6,7 @@ export interface Paginated<T> {
 }
 
 export interface Query {
+  getUserBankAccounts: Paginated<BankAccount>;
   getUserAccounts: Paginated<BankAccount>;
   login?: User;
 }

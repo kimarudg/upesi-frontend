@@ -54,6 +54,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ConfigActions } from './theme-options/store/config.actions';
 import { AccountListComponent } from './components/account-list/account-list.component';
 import { ApiInterceptor } from './interceptors/api.interceptor';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { MaterialModule } from './material-module';
+import {
+  HasPermissionDirective,
+  LacksPermissionDirective,
+} from './directives/permissions';
+import { DepositWithdrawComponent } from './components/deposit-withdraw/deposit-withdraw.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -79,6 +86,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AlertPageComponent,
     DashboardComponent,
     AccountListComponent,
+    CreateAccountComponent,
+    HasPermissionDirective,
+    LacksPermissionDirective,
+    DepositWithdrawComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +97,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserAnimationsModule,
     CommonModule,
     NgReduxModule,
+    MaterialModule,
 
     LoadingBarRouterModule,
     // Angular Bootstrap Components

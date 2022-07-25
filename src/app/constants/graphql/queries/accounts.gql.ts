@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const USER_BANK_ACCOUNTS_LIST = gql`
-  query getBankUserAccounts(
+  query getUserBankAccounts(
     $skip: Int!
     $take: Int!
     $userId: String!
@@ -14,10 +14,13 @@ export const USER_BANK_ACCOUNTS_LIST = gql`
       search: $search
     ) {
       list {
+        id
         name
         reference
         currentBalance
         lastUpdated
+        approved
+        currency
       }
     }
   }
