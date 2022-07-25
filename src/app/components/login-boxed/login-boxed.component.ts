@@ -56,12 +56,17 @@ export class LoginBoxedComponent implements OnInit {
       .login(email, password)
       .pipe(first())
       .subscribe(
-        async (data) => {
-          this.router.navigate([this.returnUrl]);
+        (data) => {
+          this.redirect();
         },
         (error) => {
           this.alertService.error(error.map((e) => e.message).join(' \n'));
         }
       );
+  }
+
+  redirect() {
+    console.log('NAVIGATING TO ', this.returnUrl);
+    this.router.navigate([this.returnUrl]);
   }
 }

@@ -1,0 +1,150 @@
+<div class="main-card mb-3 card">
+  <div class="card-header">User Accounts</div>
+  <app-alert></app-alert>
+  <div class="table-responsive">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      matSortActive="name"
+      matSortDirection="asc"
+      matSortDisableClear
+      class="align-middle mb-0 table table-borderless table-striped table-hover"
+    >
+      <ng-container matColumnDef="name">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-center"
+        >
+          Name
+        </th>
+        <td mat-cell *matCellDef="let acc" class="text-center text-muted">
+          <div>{{ acc?.name }}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="reference">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-center"
+        >
+          Reference
+        </th>
+        <td mat-cell *matCellDef="let acc" class="text-center text-muted">
+          <div>{{ acc?.reference }}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="balance">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-center"
+        >
+          Balance
+        </th>
+        <td mat-cell *matCellDef="let acc" class="text-center text-muted">
+          <div>{{ acc?.currentBalance }}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="currency">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-center"
+        >
+          Currency
+        </th>
+        <td mat-cell *matCellDef="let acc" class="text-center text-muted">
+          <div>{{ acc?.currency?.code }}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="approved">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-center"
+        >
+          Approved
+        </th>
+        <td mat-cell *matCellDef="let acc" class="text-center text-muted">
+          <div>
+            <div *ngIf="acc?.approved === true" class="btn btn-success">
+              Approved
+            </div>
+            <div *ngIf="acc?.approved === false" class="btn btn-danger">
+              Not Approved
+            </div>
+            <div *ngIf="acc?.approved === null" class="btn btn-info">
+              Pending Approval
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="text-center"
+        >
+          Action
+        </th>
+        <td mat-cell *matCellDef="let acc" class="text-center text-muted">
+          <div>
+            <div *ngIf="!acc?.approved">
+              <div
+                (click)="approveAccount(acc.id, true)"
+                *hasPermission="['BankAccountModel|update:any']"
+                class="btn btn-info"
+              >
+                Approve
+              </div>
+              <div
+                (click)="approveAccount(acc.id, false)"
+                *hasPermission="['BankAccountModel|update:any']"
+                class="btn btn-primary"
+              >
+                Reject
+              </div>
+            </div>
+
+            <div
+              *ngIf="acc?.approved"
+              class="btn btn-success"
+              (click)="withdraw(acc)"
+            >
+              Withdraw
+            </div>
+            <div
+              *ngIf="acc?.approved"
+              class="btn btn-success"
+              (click)="deposit(acc)"
+            >
+              Deposit
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <div class="d-block text-center card-footer">
+    <button class="me-2 btn-icon btn-icon-only btn btn-outline-danger">
+      <i class="pe-7s-trash btn-icon-wrapper"> </i>
+    </button>
+    <button class="btn-wide btn btn-success">Save</button>
+  </div>
+</div>

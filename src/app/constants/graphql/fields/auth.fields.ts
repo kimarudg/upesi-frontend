@@ -3,7 +3,10 @@ id
 email
 needPasswordChange
 lastLogin
-permissions
+permissions {
+  resource
+  action
+}
 confirmed
 lastSeen
 avatarHash

@@ -3,4 +3,5 @@ export const APP_ROUTES = {
   changePassword: '/auth/forgot-password',
   register: '/auth/register',
   dashboard: 'dashboard,',
+  accountList: '/account/list',
 };

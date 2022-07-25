@@ -51,4 +51,13 @@ export class AuthenticationService {
         })
       );
   }
+
+  logout() {
+    // remove user from local storage to log user out
+    sessionStorage.removeItem('currentUser');
+    this.store.set(StoreTypes.USER, null);
+    sessionStorage.clear();
+    localStorage.clear();
+    this.currentUserSubject.next(null);
+  }
 }

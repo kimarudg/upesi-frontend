@@ -1,3 +1,5 @@
+import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { AccountListComponent } from './components/account-list/account-list.component';
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BaseLayoutComponent } from './layout/base-layout/base-layout.component';
@@ -9,6 +11,7 @@ import {
   ForgotPasswordBoxedComponent,
 } from './components';
 import { PagesLayoutComponent } from './layout/pages-layout/pages-layout.component';
+import { DepositWithdrawComponent } from './components/deposit-withdraw/deposit-withdraw.component';
 
 const routes: Routes = [
   {
@@ -22,6 +25,21 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
         data: { extraParameter: 'dashboardsMenu' },
+      },
+      {
+        path: 'account/list',
+        component: AccountListComponent,
+        data: { extraParameter: 'elementsMenu' },
+      },
+      {
+        path: 'account/create',
+        component: CreateAccountComponent,
+        data: { extraParameter: 'elementsMenu' },
+      },
+      {
+        path: 'account/deposit',
+        component: DepositWithdrawComponent,
+        data: { extraParameter: 'elementsMenu' },
       },
     ],
   },

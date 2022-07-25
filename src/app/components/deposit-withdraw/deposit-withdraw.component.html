@@ -1,0 +1,50 @@
+<form [formGroup]="withdrawForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h5 class="card-title">{{ action | uppercase }}</h5>
+          <br />
+          <app-alert></app-alert>
+          <div>
+            <div class="input-group">
+              <div class="input-group-text">
+                <span class="">{{ currencyCode }}</span>
+              </div>
+              <input
+                placeholder="{{ 'Amount in ' + currencySymbol }}"
+                type="number"
+                class="form-control"
+                formControlName="amount"
+                [ngClass]="{
+                  'is-invalid': submitted && f['amount'].errors
+                }"
+              />
+            </div>
+            <div
+              *ngIf="submitted && f['amount'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['amount'].errors['required']">
+                Amount is required
+              </div>
+              <div *ngIf="f['amount'].errors['minlength']">
+                Account Name must be a number
+              </div>
+            </div>
+            <br />
+
+            <button class="mt-1 btn btn-primary" type="submit">
+              <fa-icon
+                *ngIf="loading"
+                [icon]="faSpinner"
+                [spin]="true"
+              ></fa-icon>
+              {{ loading ? "Submitting ... " : "Submit" }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

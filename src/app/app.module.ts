@@ -19,7 +19,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
@@ -52,6 +52,15 @@ import { graphqlFactory } from './constants';
 import { AlertPageComponent } from './components/alert-page/alert-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ConfigActions } from './theme-options/store/config.actions';
+import { AccountListComponent } from './components/account-list/account-list.component';
+import { ApiInterceptor } from './interceptors/api.interceptor';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { MaterialModule } from './material-module';
+import {
+  HasPermissionDirective,
+  LacksPermissionDirective,
+} from './directives/permissions';
+import { DepositWithdrawComponent } from './components/deposit-withdraw/deposit-withdraw.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -76,6 +85,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FooterComponent,
     AlertPageComponent,
     DashboardComponent,
+    AccountListComponent,
+    CreateAccountComponent,
+    HasPermissionDirective,
+    LacksPermissionDirective,
+    DepositWithdrawComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +97,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserAnimationsModule,
     CommonModule,
     NgReduxModule,
+    MaterialModule,
 
     LoadingBarRouterModule,
     // Angular Bootstrap Components
@@ -102,6 +117,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: APOLLO_OPTIONS,
       useFactory: graphqlFactory,
       deps: [HttpLink],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true,
     },
     ConfigActions,
   ],
